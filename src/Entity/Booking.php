@@ -17,8 +17,8 @@ class Booking
     #[ORM\Column(length: 50)]
     private ?string $number = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $check_in = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $check_in = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $check_out = null;
