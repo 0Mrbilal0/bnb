@@ -2,7 +2,7 @@
 
 ## Entities
 
-### User
+### Review
 
 This entity represents a review made by a traveler to a booking for a room.
 
@@ -14,7 +14,7 @@ This entity represents a review made by a traveler to a booking for a room.
 | created_at | datetime  | NOT NULL             |          |
 | traveler   | ManyToOne | NOT NULL, OrphanTrue | User     |
 | rooms      | ManyToOne | NOT NULL, OrphanTrue | Room     |
-| booking    | OnToOne   | NOT NULL, OrphanTrue | Booking  |
+| bookings   | OneToMany | NOT NULL, OrphanTrue | Booking  |
 
 ### Booking
 
