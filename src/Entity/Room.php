@@ -29,13 +29,13 @@ class Room
     private ?string $city = null;
 
     #[ORM\Column(length: 50, nullable: true)]
-    private ?string $country = 'images/room-default.jpg';
+    private ?string $country = null;
 
     #[ORM\Column]
     private ?int $price = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $cover = null;
+    private ?string $cover = '/images/room-cover.jpg';
 
     #[ORM\ManyToOne(inversedBy: 'rooms')]
     #[ORM\JoinColumn(nullable: false)]
@@ -44,15 +44,23 @@ class Room
     #[ORM\OneToMany(mappedBy: 'rooms', targetEntity: Review::class, orphanRemoval: true)]
     private Collection $reviews;
 
+    #[ORM\ManyToMany(targetEntity: Equipment::class, mappedBy: 'rooms')]
+    private Collection $equipment;
+
     #[ORM\OneToMany(mappedBy: 'room', targetEntity: Booking::class, orphanRemoval: true)]
     private Collection $bookings;
 
+    #[ORM\ManyToMany(targetEntity: Favorite::class, mappedBy: 'rooms')]
+    private Collection $favorites;
 
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
+        $this->equipment = new ArrayCollection();
         $this->bookings = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -186,6 +194,33 @@ class Room
     }
 
     /**
+     * @return Collection<int, Equipment>
+     */
+    public function getEquipment(): Collection
+    {
+        return $this->equipment;
+    }
+
+    public function addEquipment(Equipment $equipment): static
+    {
+        if (!$this->equipment->contains($equipment)) {
+            $this->equipment->add($equipment);
+            $equipment->addRoom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipment(Equipment $equipment): static
+    {
+        if ($this->equipment->removeElement($equipment)) {
+            $equipment->removeRoom($this);
+        }
+
+        return $this;
+    }
+
+    /**
      * @return Collection<int, Booking>
      */
     public function getBookings(): Collection
@@ -197,7 +232,7 @@ class Room
     {
         if (!$this->bookings->contains($booking)) {
             $this->bookings->add($booking);
-            $booking->setRooms($this);
+            $booking->setRoom($this);
         }
 
         return $this;
@@ -207,9 +242,36 @@ class Room
     {
         if ($this->bookings->removeElement($booking)) {
             // set the owning side to null (unless already changed)
-            if ($booking->getRooms() === $this) {
-                $booking->setRooms(null);
+            if ($booking->getRoom() === $this) {
+                $booking->setRoom(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Favorite>
+     */
+    public function getFavorites(): Collection
+    {
+        return $this->favorites;
+    }
+
+    public function addFavorite(Favorite $favorite): static
+    {
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites->add($favorite);
+            $favorite->addRoom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Favorite $favorite): static
+    {
+        if ($this->favorites->removeElement($favorite)) {
+            $favorite->removeRoom($this);
         }
 
         return $this;
