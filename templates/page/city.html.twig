@@ -1,21 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
-
-{% set paragraph = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae reprehenderit consequatur et repellat earum, ex provident illo iure! Aliquam vitae enim eligendi in quidem ullam tempora beatae est quae animi!' %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block body %}
-
-    <div class="container-fluid vh-100 bg-body-tertiary">
-        <div class="d-flex justify-content-center align-items-center pt-5">
-            <div class="card col-4 text-center rounded-4 shadow-lg p-4 d-flex align-items-center justify-content-center">
-                <img src={{ asset('/images/default-1.jpg') }}
-                     width="200" class="border-2 border-light rounded-circle shadow">
-                <h1>Paris</h1>
-                <p>{{ paragraph|slice(1,150) }}...</p>
-                <p>&copy; {{ 'now'|date('Y') }}</p>
-            </div>
+    <div class="vh-100 {{ background }} text-center d-flex flex-column justify-content-center">
+        <p class="title text-white fw-bolder">
+            {{ title }}
+        </p>
+        <p class="subtitle text-white fw-bolder {{ background == 'kyoto' or background == 'hongkong' ? 'subtitle-reverse' : '' }}">
+            {{ subtitle ?? title }}
+        </p>
+        <div>
+            <a class="btn btn-custom btn-lg mt-5 rounded-pill" href="">Discover</a>
         </div>
     </div>
-
 {% endblock %}
