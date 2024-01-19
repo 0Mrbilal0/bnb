@@ -23,7 +23,7 @@
 <body>
 <header class="d-flex justify-content-between align-items-center p-3 bg-dark">
     <a href="{{ path('paris') }}" class="text-white text-decoration-none">
-        <img src={{ asset('/images/icon.svg') }} alt="logo" width="60"/>
+        <img src={{ asset('/images/icon.svg') }} alt="logo" width="40"/>
     </a>
     <div class="d-flex gap-3 align-items-center">
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -38,12 +38,12 @@
 <main>
     {% block body %}{% endblock %}
 </main>
-<footer class="text-center p-3 bg-dark text-white">
-    <a href="#" class="">Paris</a>
-    <a href="#" class="">Las Vegas</a>
-    <a href="#" class="">Kyoto</a>
-    <a href="#" class="">Sydney</a>
-    <a href="#" class="">Hong Kong</a>
+<footer class="d-flex gap-3 w-100 justify-content-center">
+    <a href={{ path('paris')}} class="text-white text-decoration-none">Paris</a>
+    <a href={{ path('lasvegas')}} class="text-white text-decoration-none">Las Vegas</a>
+    <a href={{ path('kyoto')}} class="text-white text-decoration-none">Kyoto</a>
+    <a href={{ path('sydney')}} class="text-white text-decoration-none">Sydney</a>
+    <a href={{ path('hongkong')}} class="text-white text-decoration-none">Hong Kong</a>
 </footer>
 
 </body>
