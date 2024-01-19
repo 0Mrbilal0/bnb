@@ -1,3 +1,25 @@
+:root {
+    --custom-main: #FE1F60;
+    --custom-secondary: #831ef8;
+    --custom-dark: #101010;
+}
+
+/* Custom from bootstrap */
+.btn-custom {
+    background-color: var(--custom-main);
+    color: white;
+}
+
+.btn-custom:hover, .btn-custom:active:focus, .btn-custom:active:hover, .btn-custom:active, .btn-custom:focus{
+    background-color: var(--custom-secondary);
+    color: white;
+}
+
+.bg-dark{
+    background-color: var(--custom-dark) !important;
+}
+
+/* Title & Fonts */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Libre Franklin', sans-serif;
     font-weight: 700;
@@ -8,11 +30,47 @@ body {
     font-weight: 300;
 }
 
-img {
-    transition: all 700ms ease-in;
+/* City landing page */
+.paris{
+    background-image: url("/images/paris.jpg");
+}
+.kyoto{
+    background-image: url("/images/kyoto.jpg");
+}
+.lasvegas{
+    background-image: url("/images/las-vegas.jpg");
+}
+.sydney{
+    background-image: url("/images/sydney.jpg");
+}
+.hongkong{
+    background-image: url("/images/hong-kong.jpg");
 }
 
-img:hover {
-    transform: scale(0.9);
-    transition: all 700ms ease-out;
+.paris, .kyoto, .lasvegas, .sydney, .hongkong {
+    background-size: cover;
+    background-position: center;
+}
+
+.title, .subtitle {
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 8vw;
+    line-height: 1;
+    font-wight: 900;
+}
+
+.subtitle {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .25rem;
+    -webkit-text-stroke-color: #fff;
+    transform: rotate(180deg);
+}
+
+.subtitle-reverse {
+    transform: inherit;
+}
+
+footer {
+    position: fixed;
+    bottom: 2rem;
 }
